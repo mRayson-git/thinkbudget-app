@@ -1,0 +1,16 @@
+<form [formGroup]="accountForm" class="flex-column">
+    <mat-form-field color="accent">
+        <mat-label>name</mat-label>
+        <input matInput formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+        <mat-label>type</mat-label>
+        <mat-select formControlName="type">
+            <mat-option value="asset">ASSET</mat-option>
+            <mat-option value="expense">EXPENSE</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-flat-button color="primary" type="button" [disabled]="accountForm.invalid"
+        (click)="createAccount()">CREATE ACCOUNT</button>
+</form>

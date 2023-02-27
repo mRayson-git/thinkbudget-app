@@ -1,0 +1,35 @@
+.mat-column-amount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: fit-content;
+}
+
+.mat-column-destinationAccount {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.mat-column-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: fit-content;
+}
+
+.mat-column-delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: fit-content;
+    padding: 0;
+}
+
+.stats {
+    margin-bottom: 1em;
+}
+
+.expense {
+    color: red;
+}

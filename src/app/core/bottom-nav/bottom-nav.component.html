@@ -1,0 +1,26 @@
+<mat-toolbar color="primary" class="footer flex-row">
+    <button mat-button class="expand" style="height: 100%;" [mat-menu-trigger-for]="activityMenu">ACTIVITY</button>
+    <button mat-button class="expand" style="height: 100%;" [mat-menu-trigger-for]="accountMenu">ACCOUNT</button>
+</mat-toolbar>
+
+<mat-menu #accountMenu="matMenu">
+    <button mat-menu-item routerLink="/accounts/create">
+        <mat-icon>add</mat-icon>
+        create account
+    </button>
+    <button mat-menu-item routerLink="/accounts/create" dsiabled>
+        <mat-icon>view_list</mat-icon>
+        view accounts
+    </button>
+</mat-menu>
+
+<mat-menu #activityMenu="matMenu">
+    <button mat-menu-item routerLink="/transactions/create">
+        <mat-icon>add</mat-icon>
+        create transaction
+    </button>
+    <button mat-menu-item routerLink="/transactions/view">
+        <mat-icon>view_list</mat-icon>
+        view activity
+    </button>
+</mat-menu>

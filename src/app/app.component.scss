@@ -1,0 +1,25 @@
+.content {
+    margin-block: 5em;
+    margin-inline: auto;
+    max-width: 1000px;
+}
+
+.transaction-fab {
+    display: none;
+}
+
+
+@media only screen and (max-width: 480px) {
+    .content {
+        margin-block: 5em;
+        margin-inline: 1em;
+    }
+
+    .transaction-fab {
+        display: block;
+        position: fixed;
+        bottom: 5em;
+        right: 0.5em;
+        z-index: 100;
+    }
+}

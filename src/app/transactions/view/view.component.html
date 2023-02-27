@@ -1,0 +1,91 @@
+<ng-container *ngIf="transactions">
+    <div class="flex-row">
+        <h1>Transactions for:
+            <span class="primary-color-text">{{startDate | date: 'MMMM' | lowercase}}</span>
+            <ng-container *ngIf="startDate && endDate && startDate.getMonth() != endDate.getMonth()">
+                <span> - </span>
+                <span class="primary-color-text">{{endDate | date: 'MMMM' | lowercase}}</span>
+            </ng-container>
+
+        </h1>
+    </div>
+    <mat-card class="stats mat-elevation-z0">
+        <mat-card-content class="flex-column">
+            <div class="flex-row">
+                <span class="expand">total spent: </span>
+                <span>{{totalExpense | currency}}</span>
+            </div>
+            <div class="flex-row">
+                <span class="expand">total earned: </span>
+                <span>{{totalIncome | currency}}</span>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="flex-row">
+                <span class="expand">net change:</span>
+                <span [ngClass]="{'warn-color-text' : totalIncome - totalExpense < 0}">{{totalIncome - totalExpense |
+                    currency}}</span>
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-divider></mat-divider>
+
+    <form [formGroup]="periodForm" class="flex-column margin-top">
+        <mat-form-field>
+            <mat-label>enter a search range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate formControlName="startDate">
+                <input matEndDate formControlName="endDate">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+    </form>
+
+    <div class="flex-row">
+        <span class="expand"></span>
+        <button mat-button color="accent" (click)="toggleDelete()">remove?</button>
+    </div>
+
+    <mat-table [dataSource]="transactions">
+        <!-- amount -->
+        <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef>amount</mat-header-cell>
+            <mat-cell *matCellDef="let trans" [ngClass]="{'warn-color-text' : isExpense(trans)}"> {{trans.amount |
+                currency}}
+            </mat-cell>
+        </ng-container>
+        <!-- source -->
+        <ng-container matColumnDef="sourceAccount">
+            <mat-header-cell *matHeaderCellDef>source</mat-header-cell>
+            <mat-cell *matCellDef="let trans"> {{trans.sourceAccount | lowercase}} </mat-cell>
+        </ng-container>
+        <!-- destination -->
+        <ng-container matColumnDef="destinationAccount">
+            <mat-header-cell *matHeaderCellDef>destination</mat-header-cell>
+            <mat-cell *matCellDef="let trans">
+                <span class="truncated">{{trans.destinationAccount |
+                    lowercase}}</span>
+            </mat-cell>
+        </ng-container>
+        <!-- date -->
+        <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef>date</mat-header-cell>
+            <mat-cell *matCellDef="let trans"> {{trans.date | date:'yyyy-MM-dd'}} </mat-cell>
+        </ng-container>
+        <!-- removal -->
+        <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let trans">
+                <button mat-icon-button color="warn" (click)="removeTransaction(trans)">
+                    <mat-icon>remove</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Header and Row Declarations -->
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+</ng-container>

@@ -1,0 +1,48 @@
+<ng-container *ngIf="accounts && accounts.length > 0">
+    <form [formGroup]="transactionForm" class="flex-column">
+        <mat-form-field color="accent">
+            <mat-label>description</mat-label>
+            <input matInput type="text" formControlName="description">
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+            <mat-label>amount</mat-label>
+            <input matInput type="number" formControlName="amount">
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+            <mat-label>source account</mat-label>
+            <input matInput type="text" formControlName="sourceAccount" [matAutocomplete]="sourceAccountAutocomplete">
+            <mat-autocomplete #sourceAccountAutocomplete="matAutocomplete" autoActiveFirstOption>
+                <mat-option *ngFor="let account of sourceAccountOptions | async"
+                    [value]="account.name">{{account.name}}</mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+            <mat-label>destination account</mat-label>
+            <input matInput type="text" formControlName="destinationAccount"
+                [matAutocomplete]="destinationAccountAutocomplete">
+            <mat-autocomplete #destinationAccountAutocomplete="matAutocomplete">
+                <mat-option *ngFor="let account of destinationAccountOptions | async"
+                    [value]="account.name">{{account.name}}</mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+            <mat-label>date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button mat-flat-button type="button" color="primary" [disabled]="transactionForm.invalid"
+            (click)="createTransaction()">CREATE</button>
+    </form>
+</ng-container>
+<ng-container *ngIf="accounts && accounts.length == 0">
+    <h1>Trouble finding accounts</h1>
+    <p>We could not find any eligable accounts for your transaction to be created with. Please create one here.</p>
+    <div class="flex-column">
+        <button mat-flat-button color="primary" routerLink="/accounts/create">CREATE ACCOUNT</button>
+    </div>
+</ng-container>

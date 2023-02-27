@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "thinkcomputing-budgetpwa": {
+      "hosting": {
+        "budget-pwa": [
+          "thinkcomputing-budgetpwa"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "thinkcomputing-budgetpwa"
+  }
+}
