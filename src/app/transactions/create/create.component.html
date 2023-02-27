@@ -38,6 +38,20 @@
         <button mat-flat-button type="button" color="primary" [disabled]="transactionForm.invalid"
             (click)="createTransaction()">CREATE</button>
     </form>
+    <h1>info</h1>
+    <p>The <span class="accent-color-text">source</span> and <span class="accent-color-text">destination</span> accounts
+        help to determine what kind of transaction you are making. They can fall into 3 types: </p>
+    <ul>
+        <li><span class="accent-color-text">withdrawl</span>: You own the source, <span class="accent-color-text">but
+                not</span> the destination.</li>
+        <li><span class="accent-color-text">deposit</span>: You own the destination, <span class="accent-color-text">but
+                not</span> the source.</li>
+        <li><span class="accent-color-text">transfer</span>: You own the source, <span
+                class="accent-color-text">and</span> the destination</li>
+    </ul>
+    <p>You'll be prompted to select one of your accounts (asset & expense) when filling the field, though if you enter a
+        new account name we'll automatically save it as an <span class="accent-color-text">expense</span> account for
+        future use.</p>
 </ng-container>
 <ng-container *ngIf="accounts && accounts.length == 0">
     <h1>Trouble finding accounts</h1>
